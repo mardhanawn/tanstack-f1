@@ -15,8 +15,11 @@
     "check": "biome check"
   },
   "dependencies": {
+    "@fontsource/titillium-web": "^5.3.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "latest",
+    "@tanstack/react-query": "^5.104.1",
+    "@tanstack/react-query-devtools": "^5.104.1",
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
     "react": "^19.2.0",
