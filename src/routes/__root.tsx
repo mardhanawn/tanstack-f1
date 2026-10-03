@@ -26,6 +26,9 @@ function RootComponent() {
 						<Link to="/" className="hover:text-gray-200">
 							Home
 						</Link>
+						<Link to="/debug" className="hover:text-gray-200">
+							Debug
+						</Link>
 					</div>
 				</nav>
 				<main className="flex-1">
