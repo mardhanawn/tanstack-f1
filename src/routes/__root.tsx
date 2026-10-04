@@ -11,6 +11,12 @@ import type { RouterContext } from "../router";
 
 import "../styles.css";
 
+const NAVIGATION_LINKS = [
+	{ to: "/", title: "Home" },
+	{ to: "/debug", title: "Debug" },
+	{ to: "/seasons", title: "Seasons" },
+] as const;
+
 export const Route = createRootRouteWithContext<RouterContext>()({
 	component: RootComponent,
 });
@@ -23,12 +29,11 @@ function RootComponent() {
 			<div className="min-h-screen flex flex-col">
 				<nav className="bg-gray-800 text-white p-4">
 					<div className="flex gap-4">
-						<Link to="/" className="hover:text-gray-200">
-							Home
-						</Link>
-						<Link to="/debug" className="hover:text-gray-200">
-							Debug
-						</Link>
+						{NAVIGATION_LINKS.map((link) => (
+							<Link key={link.to} to={link.to} className="hover:text-gray-200">
+								{link.title}
+							</Link>
+						))}
 					</div>
 				</nav>
 				<main className="flex-1">
