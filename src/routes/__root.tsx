@@ -16,6 +16,7 @@ const NAVIGATION_LINKS = [
 	{ to: "/debug", title: "Debug" },
 	{ to: "/seasons", title: "Seasons" },
 	{ to: "/circuits", title: "Circuits" },
+	{ to: "/teams", title: "Teams" },
 ] as const;
 
 export const Route = createRootRouteWithContext<RouterContext>()({

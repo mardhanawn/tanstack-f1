@@ -14,6 +14,8 @@ import { Route as DebugRouteImport } from './routes/debug'
 import { Route as CircuitsIndexRouteImport } from './routes/circuits/index'
 import { Route as CircuitsCircuitIdRouteImport } from './routes/circuits/$circuitId'
 import { Route as SeasonsIndexRouteImport } from './routes/seasons/index'
+import { Route as TeamsIndexRouteImport } from './routes/teams/index'
+import { Route as TeamsTeamIdRouteImport } from './routes/teams/$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,50 +42,83 @@ const SeasonsIndexRoute = SeasonsIndexRouteImport.update({
   path: '/seasons/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamsIndexRoute = TeamsIndexRouteImport.update({
+  id: '/teams/',
+  path: '/teams/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamsTeamIdRoute = TeamsTeamIdRouteImport.update({
+  id: '/teams/$teamId',
+  path: '/teams/$teamId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/debug': typeof DebugRoute
   '/circuits/$circuitId': typeof CircuitsCircuitIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/circuits/': typeof CircuitsIndexRoute
   '/seasons/': typeof SeasonsIndexRoute
+  '/teams/': typeof TeamsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/debug': typeof DebugRoute
   '/circuits/$circuitId': typeof CircuitsCircuitIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/circuits': typeof CircuitsIndexRoute
   '/seasons': typeof SeasonsIndexRoute
+  '/teams': typeof TeamsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/debug': typeof DebugRoute
   '/circuits/$circuitId': typeof CircuitsCircuitIdRoute
+  '/teams/$teamId': typeof TeamsTeamIdRoute
   '/circuits/': typeof CircuitsIndexRoute
   '/seasons/': typeof SeasonsIndexRoute
+  '/teams/': typeof TeamsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/debug' | '/circuits/$circuitId' | '/circuits/' | '/seasons/'
+    | '/'
+    | '/debug'
+    | '/circuits/$circuitId'
+    | '/teams/$teamId'
+    | '/circuits/'
+    | '/seasons/'
+    | '/teams/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/debug' | '/circuits/$circuitId' | '/circuits' | '/seasons'
+  to:
+    | '/'
+    | '/debug'
+    | '/circuits/$circuitId'
+    | '/teams/$teamId'
+    | '/circuits'
+    | '/seasons'
+    | '/teams'
   id:
     | '__root__'
     | '/'
     | '/debug'
     | '/circuits/$circuitId'
+    | '/teams/$teamId'
     | '/circuits/'
     | '/seasons/'
+    | '/teams/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DebugRoute: typeof DebugRoute
   CircuitsCircuitIdRoute: typeof CircuitsCircuitIdRoute
+  TeamsTeamIdRoute: typeof TeamsTeamIdRoute
   CircuitsIndexRoute: typeof CircuitsIndexRoute
   SeasonsIndexRoute: typeof SeasonsIndexRoute
+  TeamsIndexRoute: typeof TeamsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -123,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SeasonsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teams/': {
+      id: '/teams/'
+      path: '/teams'
+      fullPath: '/teams/'
+      preLoaderRoute: typeof TeamsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teams/$teamId': {
+      id: '/teams/$teamId'
+      path: '/teams/$teamId'
+      fullPath: '/teams/$teamId'
+      preLoaderRoute: typeof TeamsTeamIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -130,8 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DebugRoute: DebugRoute,
   CircuitsCircuitIdRoute: CircuitsCircuitIdRoute,
+  TeamsTeamIdRoute: TeamsTeamIdRoute,
   CircuitsIndexRoute: CircuitsIndexRoute,
   SeasonsIndexRoute: SeasonsIndexRoute,
+  TeamsIndexRoute: TeamsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
